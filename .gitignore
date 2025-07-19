@@ -1,0 +1,17 @@
+# Secrets and credentials
+.streamlit/secrets.toml
+credentials.json
+token.pickle
+client_credentials.json
+client_credentials0.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# OS
+.DS_Store
+
+# Other
+ignor/ 
