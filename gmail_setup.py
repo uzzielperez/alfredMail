@@ -24,8 +24,14 @@ def setup_gmail_auth():
     # If there are no (valid) credentials available, let the user log in
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
-        else:
+            try:
+                creds.refresh(Request())
+            except Exception as e:
+                print(f"⚠️  Token refresh failed: {e}")
+                print("🔄 Will re-authenticate with fresh credentials...")
+                creds = None  # Force re-authentication
+        
+        if not creds or not creds.valid:
             # You need to download credentials.json from Google Cloud Console first
             if not os.path.exists('client_credentials.json'):
                 print("❌ Missing client_credentials.json!")
